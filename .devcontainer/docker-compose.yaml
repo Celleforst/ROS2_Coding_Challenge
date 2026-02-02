@@ -1,0 +1,36 @@
+services:
+  ros2:
+    image: ros2-coding-challenge
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ros2_coding_challenge
+    command: /sbin/init
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+    cgroup: host
+    volumes:
+      - ../workspace:/workspace
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+      - /dev/dri:/dev/dri
+    devices:
+      - /dev/dri:/dev/dri
+    tmpfs:
+      - /run:exec,nosuid,size=100m
+      - /run/lock:exec,nosuid,size=100m
+    tty: true
+    stdin_open: true
+    environment:
+      - container=docker
+      - ROS_DOMAIN_ID=0
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+      - DISPLAY=${DISPLAY:-:0}
+      - QT_X11_NO_MITSHM=1
+      - XDG_RUNTIME_DIR=/run/user/1000
+    network_mode: host
+    ipc: host
+    working_dir: /workspace

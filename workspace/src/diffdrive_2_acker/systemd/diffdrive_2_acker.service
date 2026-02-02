@@ -1,0 +1,17 @@
+[Unit]
+Description=Diffdrive to Ackermann converter node
+After=network.target
+
+[Service]
+Type=simple
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=ROS_DISTRO=humble
+Environment=ROS_LOG_DIR=/tmp
+Environment=HOME=/tmp
+WorkingDirectory=/workspace
+ExecStart=/usr/bin/env bash -lc 'source /opt/ros/humble/setup.bash && source /workspace/install/setup.bash && ros2 run diffdrive_2_acker diff_to_ack'
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

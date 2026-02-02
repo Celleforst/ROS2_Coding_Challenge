@@ -1,0 +1,12 @@
+[Unit]
+Description=Setup XDG Runtime Directory
+DefaultDependencies=no
+Before=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'mkdir -p /run/user/1000 && chown 1000:1000 /run/user/1000 && chmod 700 /run/user/1000'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=sysinit.target
