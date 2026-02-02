@@ -1,0 +1,4 @@
+[submodule "workspace/src/ugv_sim"]
+	path = workspace/src/ugv_sim
+	url = https://github.com/agilexrobotics/ugv_sim.git
+	branch = humble
